@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { AuthenticationProvider } from "./contexts/useAuth";
 import { NavigationProvider } from "./contexts/useNavigation";
-import "./firebase-messaging-sw.js";
+import "./firebaseConfig.js";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
