@@ -1,5 +1,6 @@
-import { initializeApp } from "../node_modules/firebase/app";
-import { getMessaging } from "../node_modules/firebase/messaging";
+import { initializeApp } from "firebase/app";
+import { getMessaging } from "firebase/messaging";
+import { onBackgroundMessage } from "firebase/messaging/sw";
 
 // Initialize the Firebase app in the service worker by passing in
 // your app's Firebase config object.
@@ -18,17 +19,17 @@ const firebaseApp = initializeApp({
 // messages.
 const messaging = getMessaging(firebaseApp);
 console.log("aaa", messaging.body);
-// onBackgroundMessage(messaging, (payload) => {
-//   console.log(
-//     "[firebase-messaging-sw.js] Received background message ",
-//     payload
-//   );
-//   // Customize notification here
-//   const notificationTitle = "Background Message Title";
-//   const notificationOptions = {
-//     body: "Background Message body.",
-//     icon: "/firebase-logo.png",
-//   };
+onBackgroundMessage(messaging, (payload) => {
+  console.log(
+    "[firebase-messaging-sw.js] Received background message ",
+    payload
+  );
+  // Customize notification here
+  const notificationTitle = "Background Message Title";
+  const notificationOptions = {
+    body: "Background Message body.",
+    icon: "/firebase-logo.png",
+  };
 
-//   self.registration.showNotification(notificationTitle, notificationOptions);
-// });
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});
