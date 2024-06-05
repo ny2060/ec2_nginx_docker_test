@@ -1,9 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
-self.addEventListener("install", function (e) {
-  console.log("fcm sw install..");
-  self.skipWaiting();
-});
+
 const firebaseConfig = {
   apiKey: "AIzaSyDQtHhFZZbld2hgmgmSzwEcTMnv45RA5HA",
   authDomain: "triptogether-e7bac.firebaseapp.com",
