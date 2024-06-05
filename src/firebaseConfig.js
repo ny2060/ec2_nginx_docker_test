@@ -12,27 +12,28 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
+if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
+  const messaging = getMessaging(app);
+  Notification.requestPermission().then((result) => {
+    if (result === "granted") {
+      console.log(result);
+      getToken(messaging, {
+        vapidKey:
+          "BLTEGJyz9jByUf8b8G7RIDhvy6VpPNsvvU7T8Nlcw_7pz7SHzzARDrnev2JLlnZnoYAAvxIvZxpgqfxelO97IaM",
+      }).then((token) => {
+        if (token.length > 0) {
+          console.log("푸시 토큰 : ", token);
+        } else {
+          console.log("푸시 토큰 실패 !");
+        }
+      });
+    } else if (result === "denied") {
+      console.log(result);
+    }
+  });
+  console.log("aaaassa", messaging);
 
-Notification.requestPermission().then((result) => {
-  if (result === "granted") {
-    console.log(result);
-    getToken(messaging, {
-      vapidKey:
-        "BLTEGJyz9jByUf8b8G7RIDhvy6VpPNsvvU7T8Nlcw_7pz7SHzzARDrnev2JLlnZnoYAAvxIvZxpgqfxelO97IaM",
-    }).then((token) => {
-      if (token.length > 0) {
-        console.log("푸시 토큰 : ", token);
-      } else {
-        console.log("푸시 토큰 실패 !");
-      }
-    });
-  } else if (result === "denied") {
-    console.log(result);
-  }
-});
-console.log("aaaassa", messaging);
-
-onMessage(messaging, (payload) => {
-  console.log("message received.", payload);
-});
+  onMessage(messaging, (payload) => {
+    console.log("message received.", payload);
+  });
+}
