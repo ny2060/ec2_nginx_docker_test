@@ -4,10 +4,12 @@ import NavigationStack from "./components/common/Navigation/NavigationStack";
 import Toggle from "./components/common/Toggle";
 import { useAuth } from "./contexts/useAuth";
 import useToggle from "./hooks/useToggle";
+import { handleAllowNotification } from "./service/notificationPermission";
 
 function App() {
   const [showAlarm, toggleAlarm] = useToggle();
   const { member, setIdx } = useAuth();
+  handleAllowNotification();
   return (
     <>
       <Toggle selected={showAlarm} onClick={toggleAlarm} />

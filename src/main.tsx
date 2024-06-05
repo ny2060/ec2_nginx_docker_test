@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { AuthenticationProvider } from "./contexts/useAuth";
 import { NavigationProvider } from "./contexts/useNavigation";
-import "./firebaseConfig.js";
+import "./service/initFirebase.js";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
